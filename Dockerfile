@@ -4,7 +4,7 @@ ENV SOURCE_REPO https://github.com/official-stockfish/Stockfish
 ENV VERSION master
 WORKDIR /tmp
 ADD ${SOURCE_REPO}/archive/${VERSION}.tar.gz /tmp
-RUN adduser --disabled-password --gecos '' vao && apt -qq update && apt -qq -y install openbsd-inetd gcc-8
+RUN adduser --disabled-password --gecos '' vao && apt -qq update && apt -qq -y install openbsd-inetd
 RUN if [ ! -d Stockfish-${VERSION} ]; then tar xvzf *.tar.gz; fi \
   && cd Stockfish-${VERSION}/src \
   && install_packages make g++ \
