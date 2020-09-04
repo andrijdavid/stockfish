@@ -1,7 +1,7 @@
 FROM bitnami/minideb:stretch
 
 ENV SOURCE_REPO https://github.com/official-stockfish/Stockfish
-ENV VERSION master
+ENV VERSION sf_12
 WORKDIR /tmp
 ADD ${SOURCE_REPO}/archive/${VERSION}.tar.gz /tmp
 RUN adduser --disabled-password --gecos '' vao && apt -qq update && apt -qq -y --no-install-recommends install openbsd-inetd
