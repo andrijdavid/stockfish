@@ -13,8 +13,6 @@ services:
       args:
         VERSION: sf_11
     image: andrijdavid/stockfish:11
-    args:
-      VERSION: sf_11
   '12':
     build:       
       context: .
