@@ -9,7 +9,7 @@ RUN if [ ! -d Stockfish-${VERSION} ]; then tar xvzf *.tar.gz; fi \
   && install_packages make g++ openbsd-inetd curl wget \
   && make help \
   && make build ARCH=x86-64-modern \
-  && make net \
+  && if [ "$VERSION" = "sf_11" ] ; then echo 'Stockfish < 12' ; else make net; fi \
   && make install \
   && cd ../.. && rm -rf Stockfish-${VERSION} *.tar.gz && rm -rf /var/lib/apt/lists/*
 
