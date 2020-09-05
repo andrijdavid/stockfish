@@ -1,17 +1,23 @@
 version: '3'
 services:
   latest:
-    build: .
+    build: 
+      context: .
+      args:
+        VERSION: master
     image: andrijdavid/stockfish:latest
-    args:
-      - VERSION: master
+
   '11':
-    build: .
+    build:       
+      context: .
+      args:
+        VERSION: sf_11
     image: andrijdavid/stockfish:11
     args:
-      - VERSION: sf_11
+      VERSION: sf_11
   '12':
-    build: .
+    build:       
+      context: .
+      args:
+        VERSION: sf_12
     image: andrijdavid/stockfish:12 
-    args:
-      - VERSION: sf_12
