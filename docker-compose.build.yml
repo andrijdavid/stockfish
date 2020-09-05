@@ -3,6 +3,8 @@ services:
   latest:
     build: .
     image: andrijdavid/stockfish:latest
+    environment:
+      - VERSION=master
   '11':
     build: .
     image: andrijdavid/stockfish:11
