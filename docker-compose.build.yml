@@ -1,0 +1,11 @@
+version: '3'
+services:
+  latest:
+    build: .
+    image: andrijdavid/stockfish:latest
+  11:
+    build: .
+    image: andrijdavid/stockfish:11
+  12:
+    build: .
+    image: andrijdavid/stockfish:12 
