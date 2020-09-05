@@ -1,5 +1,5 @@
 FROM bitnami/minideb:buster
-ENV VERSION
+ARG VERSION
 ENV SOURCE_REPO https://github.com/official-stockfish/Stockfish
 WORKDIR /tmp
 ADD ${SOURCE_REPO}/archive/${VERSION}.tar.gz /tmp
