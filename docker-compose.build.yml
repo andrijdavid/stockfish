@@ -4,14 +4,14 @@ services:
     build: .
     image: andrijdavid/stockfish:latest
     environment:
-      - VERSION=master
+      VERSION: master
   '11':
     build: .
     image: andrijdavid/stockfish:11
     environment:
-      - VERSION=sf_11
+      VERSION: sf_11
   '12':
     build: .
     image: andrijdavid/stockfish:12 
     environment:
-      - VERSION=sf_12
+      VERSION: sf_12
