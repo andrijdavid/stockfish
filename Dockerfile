@@ -1,7 +1,6 @@
 FROM bitnami/minideb:buster
 
 ENV SOURCE_REPO https://github.com/official-stockfish/Stockfish
-ENV VERSION master
 WORKDIR /tmp
 ADD ${SOURCE_REPO}/archive/${VERSION}.tar.gz /tmp
 RUN adduser --disabled-password --gecos '' vao && apt -qq update
