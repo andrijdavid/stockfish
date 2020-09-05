@@ -3,15 +3,15 @@ services:
   latest:
     build: .
     image: andrijdavid/stockfish:latest
-    environment:
-      VERSION: master
+    args:
+      - VERSION: master
   '11':
     build: .
     image: andrijdavid/stockfish:11
-    environment:
-      VERSION: sf_11
+    args:
+      - VERSION: sf_11
   '12':
     build: .
     image: andrijdavid/stockfish:12 
-    environment:
-      VERSION: sf_12
+    args:
+      - VERSION: sf_12
