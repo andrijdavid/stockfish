@@ -5,17 +5,17 @@ services:
       context: .
       args:
         VERSION: master
-    image: andrijdavid/stockfish:latest
+    image: quay.io/andrijdavid/stockfish:latest
 
   '11':
     build:       
       context: .
       args:
         VERSION: sf_11
-    image: andrijdavid/stockfish:11
+    image: quay.io/andrijdavid/stockfish:11
   '12':
     build:       
       context: .
       args:
         VERSION: sf_12
-    image: andrijdavid/stockfish:12 
+    image: quay.io/andrijdavid/stockfish:12 
