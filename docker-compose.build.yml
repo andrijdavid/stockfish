@@ -18,4 +18,10 @@ services:
       context: .
       args:
         VERSION: sf_12
-    image: quay.io/andrijdavid/stockfish:12 
+    image: quay.io/andrijdavid/stockfish:12
+  '14':
+    build:       
+      context: .
+      args:
+        VERSION: sf_14
+    image: quay.io/andrijdavid/stockfish:14
