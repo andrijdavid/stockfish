@@ -25,3 +25,9 @@ services:
       args:
         VERSION: sf_14
     image: quay.io/andrijdavid/stockfish:14
+  '15':
+    build:       
+      context: .
+      args:
+        VERSION: sf_15
+    image: quay.io/andrijdavid/stockfish:15
