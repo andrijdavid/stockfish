@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM bitnami/minideb
 ARG VERSION
 ENV SOURCE_REPO https://github.com/official-stockfish/Stockfish
 WORKDIR /tmp
