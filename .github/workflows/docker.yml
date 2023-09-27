@@ -1,0 +1,69 @@
+name: docker-build
+
+on:
+  push:
+    branches:
+      - 'main'
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest stockfish release
+        id: stockfish
+        uses: cardinalby/git-get-release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          repo: official-stockfish/Stockfish
+          draft: false
+          prerelease: false
+          latest: true
+      - name: Split tag name and id
+        env:
+          BRANCH: ${{ steps.stockfish.outputs.target_commitish }}
+        id: split
+        run: echo "fragment=${BRANCH##*v}" >> $GITHUB_OUTPUT
+      -
+        name: Login to Quay.io
+        uses: docker/login-action@v2
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAYIO_USERNAME }}
+          password: ${{ secrets.QUAYIO_TOKEN }}
+          
+      - name: Check image tag exists
+        id: image_exists
+        continue-on-error: true 
+        uses: cloudposse/github-action-docker-image-exists@main
+        with:
+            registry: quay.io
+            organization: andrijdavid
+            repository: stockfish
+            login: ${{ secrets.QUAYIO_USERNAME }}
+            password: ${{ secrets.QUAYIO_TOKEN }}
+            tag: ${{ steps.split.outputs.fragment }}
+      -
+        name: Set up QEMU
+        if: steps.image_exists.outcome != 'success'
+        uses: docker/setup-qemu-action@v2
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+      -
+        name: Set up Docker Buildx
+        if: steps.image_exists.outcome != 'success'
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build and push
+        if: steps.image_exists.outcome != 'success'
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: quay.io/andrijdavid/stockfish:latest, quay.io/andrijdavid/stockfish:${{ steps.split.outputs.fragment }}, quay.io/andrijdavid/stockfish:${{ steps.stockfish.outputs.tag_name }}
+          build-args: |
+            RUST_VER=1.70
+            VERSION=${{ steps.split.outputs.fragment }}
+          
